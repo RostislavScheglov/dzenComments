@@ -1,38 +1,62 @@
-.App {
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
+
+body {
+  background-color: #f8f0e5;
+}
+* {
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+button {
+  cursor: pointer;
+}
+.pageTitle {
   text-align: center;
+  margin-bottom: 1em;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.formContainer {
+  width: 35%;
+  margin: 0 auto;
+  border-radius: 30px;
+  padding: 1em 2em;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@media screen and (max-width: 1200px) {
+  .formContainer {
+    width: 50%;
   }
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+@media screen and (max-width: 980px) {
+  .formContainer {
+    width: 60%;
+  }
+}
+@media screen and (max-width: 550px) {
+  .formContainer {
+    width: 90%;
+  }
+}
+#userDataForm {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin: 0 auto;
+}
+#userDataForm > * {
+  margin-bottom: 1em;
 }
 
-.App-link {
-  color: #61dafb;
+.commnetsContainer {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  column-gap: 1em;
+  row-gap: 2.5em;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.commentCard {
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+  border: 2px solid black;
 }
