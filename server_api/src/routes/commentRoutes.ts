@@ -3,14 +3,19 @@ import { checkAuthor, checkSession } from '../middleware/checkers'
 // import { recipeValidation } from '../validators/recipesValidator.ts'
 import {
   createComment,
-  getAllComments,
+  fileUpload,
+  getMainComments,
+  getOneComment,
   updateComment,
+  upload,
 } from '../controllers/commentController'
 import { commentValidation } from '../validators/commentValidator'
 
 const commentRouter = express.Router()
 
-commentRouter.get('/', checkSession, getAllComments)
+commentRouter.get('/', checkSession, getMainComments)
+commentRouter.get('/:commentId', checkSession, getOneComment)
+commentRouter.get('/upload', checkSession, upload.single('file'), fileUpload)
 
 // recipesRouter.delete('/img/:id', deleteImg)
 

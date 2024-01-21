@@ -10,6 +10,7 @@ const port = 4000
 
 app.use(cors())
 app.use(express.json({ limit: '5mb', type: 'application/json' }))
+
 app.use('/user', userRouter)
 app.use('/comments', commentRouter)
 

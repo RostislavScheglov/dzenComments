@@ -2,11 +2,13 @@ import axios from '../axios/axios'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Comment } from '../components/Comment'
+import { CreateNewComment } from '../components/CreateComment'
 
 export function AllComments() {
   //   const navigate = useNavigate()
   const [comments, setComments] = useState([])
   const [isLoading, setLoading] = useState(true)
+  const [isCreateComment, setIsCreateComment] = useState(false)
 
   const fetchAllComments = async () => {
     try {
@@ -39,13 +41,13 @@ export function AllComments() {
   return (
     <>
       <h1 className="pageTitle">All Comments</h1>
+      <button onClick={() => setIsCreateComment(!isCreateComment)}>
+        Create new Comment
+      </button>
+      {isCreateComment ? <CreateNewComment /> : null}
       <div className="commnetsContainer">
         {comments.map((comment: any) => {
-          return (
-            <div>
-              <Comment commentData={comment} />
-            </div>
-          )
+          return <Comment commentData={comment} />
         })}
       </div>
     </>

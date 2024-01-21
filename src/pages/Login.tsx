@@ -2,6 +2,7 @@ import axios from '../axios/axios'
 import React from 'react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { Navigate } from 'react-router-dom'
 
 export function Login() {
   const [showPass, setShowPass] = useState(false)
@@ -34,9 +35,9 @@ export function Login() {
     mode: 'onChange',
   })
 
-  //   if (isAuth) {
-  //     return <Navigate to="/" />
-  //   }
+  if (window.sessionStorage.getItem('token')) {
+    return <Navigate to="/" />
+  }
 
   return (
     <div>

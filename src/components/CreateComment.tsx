@@ -3,26 +3,30 @@ import React from 'react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-export function CreateNewComment() {
+export function CreateNewComment(commentId?: any) {
   const [isCreated, setIsCreated] = useState(false)
 
   const createNewComment = async (params: any) => {
     try {
-      const res = await axios.post('/comment', params)
+      const url = commentId.commentId
+        ? `/comment?commentId=${commentId.commentId}`
+        : '/comment'
+      console.log(url)
+      const res = await axios.post(url, params)
       setIsCreated(true)
     } catch (err) {
       console.log(err)
     }
   }
 
-  const createReply = async (params: any, commentId: string) => {
-    try {
-      const res = await axios.patch('/comment', params)
-      setIsCreated(true)
-    } catch (err) {
-      console.log(err)
-    }
-  }
+  // const createReply = async (params: any, commentId: string) => {
+  //   try {
+  //     const res = await axios.patch('/comment', params)
+  //     setIsCreated(true)
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }
 
   const {
     register,
@@ -36,13 +40,14 @@ export function CreateNewComment() {
   if (isCreated) return null
   return (
     <div className="createCommentContainer">
-      <h2 className="pageTitle">Create a new Comment</h2>
+      <span className="">Create a new Comment</span>
       <form>
         <input
           type="text"
           {...register('text', { required: 'Text required' })}
         />
-        <button type="submit">Send</button>
+        <div onClick={createNewComment}>Send</div>
+        {/* <button onClick={() => createNewComment}>Send</button> */}
       </form>
     </div>
   )
