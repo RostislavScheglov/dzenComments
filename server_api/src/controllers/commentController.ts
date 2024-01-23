@@ -134,14 +134,17 @@ export const fileUpload = async (req: Request, res: Response) => {
         Bucket: 's3fortest123',
         Key:
           Math.random().toString(36).substr(2, 15) +
-          Math.random().toString(36).substr(2, 15), // File name you want to save as in S3
+          Math.random().toString(36).substr(2, 15) +
+          req.file.originalname,
         Body: req.file.buffer,
       }
       s3.upload(params, (err: Error, data: AWS.S3.ManagedUpload.SendData) => {
         if (err) {
           res.status(500).send(err)
         }
-        res.status(200).send('File uploaded successfully')
+        res
+          .status(200)
+          .send({ dataUrl: data.Location, fileName: req.file?.originalname })
       })
     }
   } catch (err) {

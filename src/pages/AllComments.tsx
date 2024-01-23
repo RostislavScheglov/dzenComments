@@ -9,6 +9,7 @@ export function AllComments() {
   const [comments, setComments] = useState([])
   const [isLoading, setLoading] = useState(true)
   const [isCreateComment, setIsCreateComment] = useState(false)
+  const [selectedCommentId, setSelectedCommentId] = useState(null)
 
   const fetchAllComments = async () => {
     try {
@@ -19,7 +20,10 @@ export function AllComments() {
       console.log(err)
     }
   }
-
+  const setRepliedId = async (commentId: any) => {
+    setSelectedCommentId(commentId)
+    setIsCreateComment(!isCreateComment)
+  }
   useEffect(() => {
     fetchAllComments()
   }, [])
@@ -44,10 +48,17 @@ export function AllComments() {
       <button onClick={() => setIsCreateComment(!isCreateComment)}>
         Create new Comment
       </button>
-      {isCreateComment ? <CreateNewComment /> : null}
+      {isCreateComment ? (
+        <CreateNewComment selectedCommentId={selectedCommentId} />
+      ) : null}
       <div className="commnetsContainer">
         {comments.map((comment: any) => {
-          return <Comment commentData={comment} />
+          return (
+            <Comment
+              commentData={comment}
+              setCommentId={setRepliedId}
+            />
+          )
         })}
       </div>
     </>

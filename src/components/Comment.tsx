@@ -1,7 +1,7 @@
 import axios from '../axios/axios'
 import React from 'react'
 
-export function Comment({ commentData }: any) {
+export function Comment({ commentData, setCommentId }: any) {
   const [replies, setReplies] = React.useState<any[]>([])
   const [isLoading, setIsLoading] = React.useState(true)
 
@@ -38,11 +38,18 @@ export function Comment({ commentData }: any) {
         <span>{commentData.author.userName}</span>
         <span>{commentData.author.userEmail}</span>
       </div>
+
       <span>{commentData.text}</span>
-      <button onClick={() => console.log(replies)}>Reply</button>
+      <div className="commentFile"></div>
+      <button onClick={() => setCommentId(commentData._id)}>Reply</button>
       <span>Replies</span>
       {replies.map((reply: any) => {
-        return <Comment commentData={reply} />
+        return (
+          <Comment
+            commentData={reply}
+            setCommentId={setCommentId}
+          />
+        )
       })}
     </div>
   )

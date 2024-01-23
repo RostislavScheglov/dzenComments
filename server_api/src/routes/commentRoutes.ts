@@ -15,7 +15,7 @@ const commentRouter = express.Router()
 
 commentRouter.get('/', checkSession, getMainComments)
 commentRouter.get('/:commentId', checkSession, getOneComment)
-commentRouter.get('/upload', checkSession, upload.single('file'), fileUpload)
+commentRouter.post('/upload', checkSession, upload.single('file'), fileUpload)
 
 // recipesRouter.delete('/img/:id', deleteImg)
 
